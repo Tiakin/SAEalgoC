@@ -20,6 +20,8 @@ int main()
     creer_tableau_vols(tableau_vols, nom_fichier);
     printf("Lecture termine\n");
 
+    rechercher_vol(tableau_vols);
+
     return 0;
 }
 
@@ -64,7 +66,7 @@ void creer_tableau_vols(Vol tableau_vols[], char nom_fichier[])
                tableau_vols[nb_vols].etat_vol,
                passagers);
 
-        // printf("%d",tableau_vols[nb_vols].numero_vol);
+
         creer_tableau_passagers(tableau_vols[nb_vols].liste_passagers, passagers);
 
         nb_vols++;
@@ -97,9 +99,65 @@ void creer_tableau_passagers(Passager tableau_passagers[], char liste[])
                &tableau_passagers[nb_passagers].numero_siege,
                &tableau_passagers[nb_passagers].prix_billet);
 
-        nb_passagers++;
 
+        nb_passagers++;
         // Extraire le passager suivant de la liste
         pt_tab = strtok(NULL, ";");
     }
+}
+
+void rechercher_vol(Vol tableau_vols[])
+{
+    char choix;
+    char compagnie[MAX_NOM] = "";
+    char destination[MAX_DESTINATION] = "";
+    int heure_decollage = 0;
+    int i; // Indice pour parcourir le tableau des vols
+    int trouve; // Variable booléenne pour indiquer si un vol a été trouvé
+
+    do
+    {
+        printf("\e[0;32m0: Quitter la recherche\n1: Rechercher par compagnie aerienne\n2: Rechercher par destination\n3: Rechercher par heure de decollage\n4: Afficher les resultats de la recherche\n\e[0;33mSaisissez un choix : \e[0;37m");
+        scanf("%d", &choix);
+
+        switch (choix)
+        {
+        case 0:
+            break;
+        case 1: // Rechercher par compagnie aérienne
+            printf("Entrez le nom de la compagnie aerienne : ");
+            scanf("%s", compagnie);
+            break;
+        case 2: // Rechercher par destination
+            printf("Entrez la destination du vol : ");
+            scanf("%s", destination);
+            break;
+        case 3: // Rechercher par heure de décollage
+            printf("Entrez l'heure de decollage du vol au format HHMM : ");
+            scanf("%d", heure_decollage);
+            break;
+        case 4: // Afficher les résultats de la recherche
+            printf("Resultats de la recherche :\n");
+            trouve = 0;
+            for (i = 0; i < MAX_VOLS && tableau_vols[i].numero_vol != '\0'; i++)
+            {
+                if ((compagnie[0] == '\0' || strcmp(compagnie, tableau_vols[i].compagnie) == 0) &&
+                    (destination[0] == '\0' || strcmp(destination, tableau_vols[i].destination) == 0) &&
+                    (heure_decollage == 0 || strcmp(heure_decollage, tableau_vols[i].heure_decollage) == 0))
+                {
+                    // ici faut afficher le vol, faut attendre la fonction...
+
+                    trouve = 1;
+                }
+            }
+            if (trouve == 0)
+            {
+                printf("Aucun vol ne correspond aux criteres de recherche.\n");
+            }
+            break;
+        default:
+            printf("Choix invalide.\n");
+            break;
+        }
+    } while (choix != 0);
 }
