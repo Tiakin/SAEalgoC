@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1702918148 source:d:\saealgoc2023\calgo\sources\main.c
+	"../Headers/main.h"
+
+1702918158 d:\saealgoc2023\calgo\headers\main.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
