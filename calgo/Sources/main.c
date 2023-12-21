@@ -108,12 +108,12 @@ void creer_tableau_passagers(Passager tableau_passagers[], char liste[])
 
 void rechercher_vol(Vol tableau_vols[])
 {
-    char choix;
+    int choix;
     char compagnie[MAX_NOM] = "";
     char destination[MAX_DESTINATION] = "";
     int heure_decollage = 0;
-    int i; // Indice pour parcourir le tableau des vols
-    int trouve; // Variable booléenne pour indiquer si un vol a été trouvé
+    int i;
+    int trouve;
 
     do
     {
@@ -134,7 +134,7 @@ void rechercher_vol(Vol tableau_vols[])
             break;
         case 3: // Rechercher par heure de décollage
             printf("Entrez l'heure de decollage du vol au format HHMM : ");
-            scanf("%d", heure_decollage);
+            scanf("%d", &heure_decollage);
             break;
         case 4: // Afficher les résultats de la recherche
             printf("Resultats de la recherche :\n");
@@ -143,10 +143,10 @@ void rechercher_vol(Vol tableau_vols[])
             {
                 if ((compagnie[0] == '\0' || strcmp(compagnie, tableau_vols[i].compagnie) == 0) &&
                     (destination[0] == '\0' || strcmp(destination, tableau_vols[i].destination) == 0) &&
-                    (heure_decollage == 0 || strcmp(heure_decollage, tableau_vols[i].heure_decollage) == 0))
+                    (heure_decollage == 0 || heure_decollage == tableau_vols[i].heure_decollage))
                 {
                     // ici faut afficher le vol, faut attendre la fonction...
-
+                    printf("%d\n",i);
                     trouve = 1;
                 }
             }
