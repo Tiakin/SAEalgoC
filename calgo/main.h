@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #define MAX_VOLS 100
 #define MAX_PASSAGERS 150
@@ -35,9 +36,20 @@ typedef struct {
     Passager liste_passagers[MAX_PASSAGERS];
 } Vol;
 
-void creer_tableau_vols(Vol tableau_vols[], char nom_fichier[]);
+int creer_tableau_vols(Vol tableau_vols[], char nom_fichier[]);
 
 void creer_tableau_passagers(Passager tableau_passagers[], char liste[]);
 
+void afficher_vols(Vol vols[]);
+
+void afficher_vol(Vol vol, int heure);
+
 void rechercher_vol(Vol tableau_vols[]);
 
+void tri_passager(Passager tableau_passagers[]);
+
+int calculer_age(char date_naissance[]);
+
+void afficher_passager(Passager passager);
+
+void embarquement(Vol vols[]);
