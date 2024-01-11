@@ -25,7 +25,7 @@ int main()
         char choix;
         do
         {
-            printf("\e[0;32m0 ou invalide : Quitter le programme\n1: affichage des vols (h+3) \n2: Rechercher vol par critere\n3: Afficher embarquement\n\e[0;33mSaisissez un choix : \e[0;37m");
+            printf("\e[0;31mMenu Principal :\n\e[0;32m0 ou invalide : Quitter le programme\n1: affichage des vols (h+3) \n2: Rechercher vol par critere\n3: Afficher embarquement\n\e[0;33mSaisissez un choix : \e[0;37m");
             scanf(" %[^\n]", &choix);
             switch (choix)
             {
@@ -187,7 +187,7 @@ void rechercher_vol(Vol tableau_vols[])
 
     do
     {
-        printf("\e[0;32m0 ou invalide: Quitter la recherche\n1: Rechercher par compagnie aerienne\n2: Rechercher par destination\n3: Rechercher par heure de decollage\n4: Afficher les resultats de la recherche\n\e[0;33mSaisissez un choix : \e[0;37m");
+        printf("\e[0;31mMenu de recherche :\n\e[0;32m0 ou invalide: Quitter la recherche\n1: Rechercher par compagnie aerienne\n2: Rechercher par destination\n3: Rechercher par heure de decollage\n4: Afficher les resultats de la recherche\n\e[0;33mSaisissez un choix : \e[0;37m");
         scanf(" %[^\n]", &choix);
         switch (choix)
         {
@@ -206,7 +206,7 @@ void rechercher_vol(Vol tableau_vols[])
         case '4': // Afficher les résultats de la recherche
             printf("Resultats de la recherche :\n");
             trouve = 0;
-            printf("Heure | Numéro | Compagnie | Destination | Comptoir | Salle | Etat\n");
+            printf("Heure | Numero | Compagnie | Destination | Comptoir | Salle | Etat\n");
             printf("---------------------------------------------------------------\n");
             for (i = 0; i < MAX_VOLS && tableau_vols[i].numero_vol != '\0'; i++)
             {
