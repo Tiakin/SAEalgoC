@@ -1,5 +1,11 @@
 #include "main.h"
 
+/**
+ * @brief fichier main contenant la base du projet
+ * @author Killian
+ *
+ */
+
 
 int main()
 {
@@ -48,8 +54,6 @@ int main()
     }
     return 1;
 }
-
-
 
 int creer_tableau_vols(Vol tableau_vols[], char nom_fichier[]) // int
 {
@@ -129,183 +133,4 @@ void creer_tableau_passagers(Passager tableau_passagers[], char liste[])
         // Extraire le passager suivant de la liste
         pt_tab = strtok(NULL, ";");
     }
-}
-
-void afficher_vols(Vol vols[])
-{
-    time_t t = time(NULL);
-    struct tm date = *localtime(&t);
-    int heure_actuelle = date.tm_hour * 100 + date.tm_min;
-
-    printf("Liste des vols dans les 3 heures a venir :\n");
-    printf("Heure | Numero | Compagnie | Destination | Comptoir | Salle | Etat\n");
-    printf("------------------------------------------------------------------\n");
-    for (int i = 0; i < MAX_VOLS && vols[i].numero_vol != '\0'; i++) {
-        // On vérifie si le vol est dans les 3 heures à venir
-        if (vols[i].heure_decollage >= heure_actuelle && vols[i].heure_decollage <= heure_actuelle + 300) {
-            afficher_vol(vols[i], heure_actuelle);
-        }
-    }
-}
-
-void afficher_vol(Vol vol, int heure)
-{
-        // On affiche l'heure de décollage
-        printf("%02d:%02d | ", vol.heure_decollage / 100, vol.heure_decollage % 100);
-        // On affiche le numéro de vol
-        printf("%d | ", vol.numero_vol);
-        // On affiche la compagnie
-        printf("%s | ", vol.compagnie);
-        // On affiche la destination
-        printf("%s | ", vol.destination);
-        // On affiche le comptoir d'enregistrement et les heures si c'est d'actualité
-        if (vol.heure_debut_enregistrement <= heure + 30 && vol.heure_fin_enregistrement >= heure - 10) {
-            printf("%d (%02d:%02d - %02d:%02d) | ", vol.numero_comptoir, vol.heure_debut_enregistrement / 100, vol.heure_debut_enregistrement % 100, vol.heure_fin_enregistrement / 100, vol.heure_fin_enregistrement % 100);
-        }
-        else {
-            printf("%d | ", vol.numero_comptoir);
-        }
-        // On affiche la salle d'embarquement et les heures si c'est d'actualité
-        if (vol.heure_debut_embarquement <= heure + 30 && vol.heure_fin_embarquement >= heure - 10) {
-            printf("%d (%02d:%02d - %02d:%02d) | ", vol.salle_embarquement, vol.heure_debut_embarquement / 100, vol.heure_debut_embarquement % 100, vol.heure_fin_embarquement / 100, vol.heure_fin_embarquement % 100);
-        }
-        else {
-            printf("%d | ", vol.salle_embarquement);
-        }
-        // On affiche l'état du vol
-        printf("%s\n", vol.etat_vol);
-}
-
-void rechercher_vol(Vol tableau_vols[])
-{
-    char choix;
-    char compagnie[MAX_NOM] = "";
-    char destination[MAX_DESTINATION] = "";
-    int heure_decollage = -1;
-    int i;
-    int trouve;
-
-    do
-    {
-        printf("\e[0;31mMenu de recherche :\n\e[0;32m0 ou invalide: Quitter la recherche\n1: Rechercher par compagnie aerienne\n2: Rechercher par destination\n3: Rechercher par heure de decollage\n4: Afficher les resultats de la recherche\n\e[0;33mSaisissez un choix : \e[0;37m");
-        scanf(" %[^\n]", &choix);
-        switch (choix)
-        {
-        case '1': // Rechercher par compagnie aérienne
-            printf("Entrez le nom de la compagnie aerienne : ");
-            scanf(" %[^\n]", compagnie);
-            break;
-        case '2': // Rechercher par destination
-            printf("Entrez la destination du vol : ");
-            scanf(" %[^\n]", destination);
-            break;
-        case '3': // Rechercher par heure de décollage
-            printf("Entrez l'heure de decollage du vol au format HHMM (-1 pour enlever la recherche): ");
-            scanf("%d", &heure_decollage);
-            break;
-        case '4': // Afficher les résultats de la recherche
-            printf("Resultats de la recherche :\n");
-            trouve = 0;
-            printf("Heure | Numero | Compagnie | Destination | Comptoir | Salle | Etat\n");
-            printf("---------------------------------------------------------------\n");
-            for (i = 0; i < MAX_VOLS && tableau_vols[i].numero_vol != '\0'; i++)
-            {
-                if ((compagnie[0] == '\0' || strstr(tableau_vols[i].compagnie, compagnie) != NULL) &&
-                    (destination[0] == '\0' || strstr(tableau_vols[i].destination, destination) != NULL) &&
-                    (heure_decollage == -1 || heure_decollage == tableau_vols[i].heure_decollage))
-                {
-                    afficher_vol(tableau_vols[i], -31);
-                    trouve = 1;
-                }
-            }
-            if (trouve == 0)
-            {
-                printf("Aucun vol ne correspond aux criteres de recherche.\n");
-            }
-            break;
-        default:
-            printf("Choix invalide.\n");
-            choix = '0';
-            break;
-        }
-    } while (choix != '0');
-}
-
-void tri_passager(Passager tableau_passagers[])
-{
-
-    // Tri décroissant des billets dans le tableau
-	for (int i = 0; i < MAX_PASSAGERS - 1 && tableau_passagers[i].numero_siege != '\0'; i++) {
-    	for (int j = 0; j < MAX_PASSAGERS - 1 - i && tableau_passagers[j].numero_siege != '\0'; j++) {
-    	    int age1 = calculer_age(tableau_passagers[j].date_naissance);
-            int age2 = calculer_age(tableau_passagers[j + 1].date_naissance);
-        	if (((tableau_passagers[j].prix_billet < tableau_passagers[j + 1].prix_billet) && ( (age1 >= 12 && age2 >= 12) || (age1 < 12 && age2 < 12) )) || (age1 >= 12 && age2 < 12)) {
-            	Passager temp = tableau_passagers[j];
-            	tableau_passagers[j] = tableau_passagers[j + 1];
-            	tableau_passagers[j + 1] = temp;
-        	}
-    	}
-	}
-}
-
-void afficher_passager(Passager passager)
-{
-    printf("%s | ", passager.nom);
-    printf("%s | ", passager.prenom);
-    printf("%s | ", passager.date_naissance);
-    printf("%d | ", passager.numero_siege);
-    printf("%.2f\n", passager.prix_billet);
-}
-
-int calculer_age(char date_naissance[])
-{
-    int jour, mois, annee;
-    int age;
-    time_t t = time(NULL);
-    struct tm date = *localtime(&t);
-
-    sscanf(date_naissance, "%d/%d/%d", &jour, &mois, &annee);
-
-    // Calculer l'âge du passager
-    age = date.tm_year + 1900 - annee; // Soustraire l'année de naissance à l'année actuelle
-    if (date.tm_mon + 1 < mois || // Si mois inférieur
-        (date.tm_mon + 1 == mois && date.tm_mday < jour)) // Si jour inférieur
-    {
-        age--; // Décrémenter l'âge de 1
-    }
-
-    // Retourner l'âge du passager
-    return age;
-}
-
-void embarquement(Vol vols[])
-{
-    Passager tab_passager[MAX_PASSAGERS];
-    int num_embarquement;
-    printf("Entrez la salle d'embarquement : ");
-    scanf("%d", &num_embarquement);
-    int num = 0;
-    for (int i = 0; i < MAX_VOLS && vols[i].salle_embarquement != '\0'; i++) {
-        if (vols[i].salle_embarquement == num_embarquement) {
-                for(int j = 0; j < MAX_PASSAGERS && vols[i].liste_passagers[j].numero_siege != '\0'; j++)
-                {
-                 tab_passager[num] = vols[i].liste_passagers[j];
-                 num++;
-                }
-        }
-    }
-
-
-    tri_passager(tab_passager);
-    printf("Liste des passagers dans la salle d'embarquement %d:\n", num_embarquement);
-    printf("Nom | Prenom | Date de naissance | Numero de siege | Prix du billet\n");
-    printf("------------------------------------------------------------------\n");
-    for (int i = 0; i < num; i++) {
-        afficher_passager(tab_passager[i]);
-    }
-    if (num == 0)
-    {
-        printf("Aucun resultat.\n");
-    }
-
 }

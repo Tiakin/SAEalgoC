@@ -31,11 +31,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.h" />
+		<Unit filename="data_vols.csv" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="data_vols.csv" />
+		<Unit filename="main.h" />
+		<Unit filename="passagerManager.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="volManager.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
