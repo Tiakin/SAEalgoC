@@ -61,6 +61,7 @@ void embarquement(Vol vols[])
     int num_embarquement;
     printf("Entrez la salle d'embarquement : ");
     scanf("%d", &num_embarquement);
+
     int num = 0;
     for (int i = 0; i < MAX_VOLS && vols[i].salle_embarquement != '\0'; i++) {
         if (vols[i].salle_embarquement == num_embarquement) {
@@ -71,8 +72,6 @@ void embarquement(Vol vols[])
                 }
         }
     }
-
-
     tri_passager(tab_passager);
     printf("Liste des passagers dans la salle d'embarquement %d:\n", num_embarquement);
     printf("Nom | Prenom | Date de naissance | Numero de siege | Prix du billet\n");

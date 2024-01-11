@@ -31,10 +31,12 @@ int main()
         char choix;
         do
         {
-            printf("\e[0;31mMenu Principal :\n\e[0;32m0 ou invalide : Quitter le programme\n1: affichage des vols (h+3) \n2: Rechercher vol par critere\n3: Afficher embarquement\n\e[0;33mSaisissez un choix : \e[0;37m");
+            printf("\e[0;31mMenu Principal :\n\e[0;32m0 : Quitter le programme\n1: affichage des vols (h+3) \n2: Rechercher vol par critere\n3: Afficher embarquement\n\e[0;33mSaisissez un choix : \e[0;37m");
             scanf(" %[^\n]", &choix);
             switch (choix)
             {
+                case '0':
+                    break;
                 case '1': // affichage
                     afficher_vols(tableau_vols);
                     break;
@@ -45,7 +47,6 @@ int main()
                     embarquement(tableau_vols);
                     break;
                 default:
-                    choix = '0';
                     printf("choix invalide.\n");
                     break;
             }

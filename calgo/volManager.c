@@ -64,10 +64,12 @@ void rechercher_vol(Vol tableau_vols[])
 
     do
     {
-        printf("\e[0;31mMenu de recherche :\n\e[0;32m0 ou invalide: Quitter la recherche\n1: Rechercher par compagnie aerienne\n2: Rechercher par destination\n3: Rechercher par heure de decollage\n4: Afficher les resultats de la recherche\n\e[0;33mSaisissez un choix : \e[0;37m");
+        printf("\e[0;31mMenu de recherche :\n\e[0;32m0: Quitter la recherche\n1: Rechercher par compagnie aerienne\n2: Rechercher par destination\n3: Rechercher par heure de decollage\n4: Afficher les resultats de la recherche\n\e[0;33mSaisissez un choix : \e[0;37m");
         scanf(" %[^\n]", &choix);
         switch (choix)
         {
+        case '0':
+            break;
         case '1': // Rechercher par compagnie aérienne
             printf("Entrez le nom de la compagnie aerienne : ");
             scanf(" %[^\n]", compagnie);
@@ -102,7 +104,6 @@ void rechercher_vol(Vol tableau_vols[])
             break;
         default:
             printf("Choix invalide.\n");
-            choix = '0';
             break;
         }
     } while (choix != '0');
