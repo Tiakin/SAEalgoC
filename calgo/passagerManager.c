@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * @brief fichier passagerManager contenant les fonctions liées au passager
+ * @brief fichier passagerManager contenant les fonctions liï¿½es au passager
  * @author Killian
- * @author Martin
+ * @author Axel
  *
  */
 
@@ -11,7 +11,7 @@
 void tri_passager(Passager tableau_passagers[])
 {
 
-    // Tri décroissant des billets dans le tableau
+    // Tri dï¿½croissant des billets dans le tableau
 	for (int i = 0; i < MAX_PASSAGERS - 1 && tableau_passagers[i].numero_siege != '\0'; i++) {
     	for (int j = 0; j < MAX_PASSAGERS - 1 - i && tableau_passagers[j].numero_siege != '\0'; j++) {
     	    int age1 = calculer_age(tableau_passagers[j].date_naissance);
@@ -43,15 +43,15 @@ int calculer_age(char date_naissance[])
 
     sscanf(date_naissance, "%d/%d/%d", &jour, &mois, &annee);
 
-    // Calculer l'âge du passager
-    age = date.tm_year + 1900 - annee; // Soustraire l'année de naissance à l'année actuelle
-    if (date.tm_mon + 1 < mois || // Si mois inférieur
-        (date.tm_mon + 1 == mois && date.tm_mday < jour)) // Si jour inférieur
+    // Calculer l'ï¿½ge du passager
+    age = date.tm_year + 1900 - annee; // Soustraire l'annï¿½e de naissance ï¿½ l'annï¿½e actuelle
+    if (date.tm_mon + 1 < mois || // Si mois infï¿½rieur
+        (date.tm_mon + 1 == mois && date.tm_mday < jour)) // Si jour infï¿½rieur
     {
-        age--; // Décrémenter l'âge de 1
+        age--; // Dï¿½crï¿½menter l'ï¿½ge de 1
     }
 
-    // Retourner l'âge du passager
+    // Retourner l'ï¿½ge du passager
     return age;
 }
 

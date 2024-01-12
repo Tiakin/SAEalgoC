@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * @brief fichier volManager contenant les fonctions liées au vol
+ * @brief fichier volManager contenant les fonctions liï¿½es au vol
  * @author Killian
- * @author Axel
+ * @author Martin
  *
  */
 
@@ -18,7 +18,7 @@ void afficher_vols(Vol vols[])
     printf("Heure | Numero | Compagnie | Destination | Comptoir | Salle | Etat\n");
     printf("------------------------------------------------------------------\n");
     for (int i = 0; i < MAX_VOLS && vols[i].numero_vol != '\0'; i++) {
-        // On vérifie si le vol est dans les 3 heures à venir
+        // On vï¿½rifie si le vol est dans les 3 heures ï¿½ venir
         if (vols[i].heure_decollage >= heure_actuelle && vols[i].heure_decollage <= heure_actuelle + 300) {
             afficher_vol(vols[i], heure_actuelle);
         }
@@ -27,29 +27,29 @@ void afficher_vols(Vol vols[])
 
 void afficher_vol(Vol vol, int heure)
 {
-        // On affiche l'heure de décollage
+        // On affiche l'heure de dï¿½collage
         printf("%02d:%02d | ", vol.heure_decollage / 100, vol.heure_decollage % 100);
-        // On affiche le numéro de vol
+        // On affiche le numï¿½ro de vol
         printf("%d | ", vol.numero_vol);
         // On affiche la compagnie
         printf("%s | ", vol.compagnie);
         // On affiche la destination
         printf("%s | ", vol.destination);
-        // On affiche le comptoir d'enregistrement et les heures si c'est d'actualité
+        // On affiche le comptoir d'enregistrement et les heures si c'est d'actualitï¿½
         if (vol.heure_debut_enregistrement <= heure + 30 && vol.heure_fin_enregistrement >= heure - 10) {
             printf("%d (%02d:%02d - %02d:%02d) | ", vol.numero_comptoir, vol.heure_debut_enregistrement / 100, vol.heure_debut_enregistrement % 100, vol.heure_fin_enregistrement / 100, vol.heure_fin_enregistrement % 100);
         }
         else {
             printf("%d | ", vol.numero_comptoir);
         }
-        // On affiche la salle d'embarquement et les heures si c'est d'actualité
+        // On affiche la salle d'embarquement et les heures si c'est d'actualitï¿½
         if (vol.heure_debut_embarquement <= heure + 30 && vol.heure_fin_embarquement >= heure - 10) {
             printf("%d (%02d:%02d - %02d:%02d) | ", vol.salle_embarquement, vol.heure_debut_embarquement / 100, vol.heure_debut_embarquement % 100, vol.heure_fin_embarquement / 100, vol.heure_fin_embarquement % 100);
         }
         else {
             printf("%d | ", vol.salle_embarquement);
         }
-        // On affiche l'état du vol
+        // On affiche l'ï¿½tat du vol
         printf("%s\n", vol.etat_vol);
 }
 
@@ -70,7 +70,7 @@ void rechercher_vol(Vol tableau_vols[])
         {
         case '0':
             break;
-        case '1': // Rechercher par compagnie aérienne
+        case '1': // Rechercher par compagnie aï¿½rienne
             printf("Entrez le nom de la compagnie aerienne : ");
             scanf(" %[^\n]", compagnie);
             break;
@@ -78,11 +78,11 @@ void rechercher_vol(Vol tableau_vols[])
             printf("Entrez la destination du vol : ");
             scanf(" %[^\n]", destination);
             break;
-        case '3': // Rechercher par heure de décollage
+        case '3': // Rechercher par heure de dï¿½collage
             printf("Entrez l'heure de decollage du vol au format HHMM (-1 pour enlever la recherche): ");
             scanf("%d", &heure_decollage);
             break;
-        case '4': // Afficher les résultats de la recherche
+        case '4': // Afficher les rï¿½sultats de la recherche
             printf("Resultats de la recherche :\n");
             trouve = 0;
             printf("Heure | Numero | Compagnie | Destination | Comptoir | Salle | Etat\n");
